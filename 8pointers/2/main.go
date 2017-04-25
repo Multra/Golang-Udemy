@@ -5,7 +5,7 @@ import (
 )
 
 func main() {
-    a := 43
+    a :=43
 
     fmt.Println(a)
     fmt.Println(&a)
@@ -13,4 +13,5 @@ func main() {
     var b *int = &a
 
     fmt.Println(b)
+    fmt.Println(*b)
 }

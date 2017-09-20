@@ -27,8 +27,13 @@ func main() {
 	for i := 0; i < 12; i++ {
 		fmt.Println(i, len(buckets[i]))
 	}
-	fmt.Println(buckets[6][3])
 
+	var inp string
+	fmt.Println("Enter a word to find what bucket it would go in and how many times it is in the text")
+	fmt.Scan(&inp)
+	wordBucket := HashBucket(inp, 12)
+	fmt.Println(inp, "is in bucket", wordBucket)
+	fmt.Println("The word", inp, "is in the text", FindBucket(inp, buckets[wordBucket]), "times")
 }
 
 func HashBucket(word string, buckets int) int {
@@ -37,4 +42,14 @@ func HashBucket(word string, buckets int) int {
 		hash += int(v)
 	}
 	return hash % buckets
+}
+
+func FindBucket(word string, bucket []string) int {
+	c := 0
+	for i := 0; i < len(bucket); i++ {
+		if bucket[i] == word {
+			c++
+		}
+	}
+	return c
 }

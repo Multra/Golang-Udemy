@@ -15,35 +15,17 @@ func main() {
 	scanner := bufio.NewScanner(res.Body)
 	defer res.Body.Close()
 	scanner.Split(bufio.ScanWords)
-	buckets := make([][]string, 12)
-	for i := 0; i < 12; i++ {
-		buckets = append(buckets, []string{})
-	}
+	buckets := make([]string, 200)
 	for scanner.Scan() {
 		word := scanner.Text()
-		n := HashBucket(word, 12)
-		buckets[n] = append(buckets[n], word)
+		buckets = append(buckets, word)
 	}
-	//	for i := 0; i < 12; i++ {
-	//		fmt.Println(i, len(buckets[i]))
-	//	}
-
 	//	var inp string
 	for i := 0; i < 2; i++ {
 		fmt.Println("Enter a word to find what bucket it would go in and how many times it is in the text")
 		//		fmt.Scan(&inp)
-		wordBucket := HashBucket(string(i), 12)
-		fmt.Println("a", "is in bucket", wordBucket)
-		fmt.Println("The word", "a", "is in the text", FindBucket(string(i), buckets[wordBucket]), "times")
+		fmt.Println("The word", "a", "is in the text", FindBucket(string(i), buckets), "times")
 	}
-}
-
-func HashBucket(word string, buckets int) int {
-	hash := 0
-	for _, v := range word {
-		hash += int(v)
-	}
-	return hash % buckets
 }
 
 func FindBucket(word string, bucket []string) int {
